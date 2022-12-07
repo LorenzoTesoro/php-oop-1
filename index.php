@@ -8,7 +8,7 @@ creando un file dedicato ai dati (tipo le array di oggetti) che potremmo chiamar
 mettendo ciascuna classe nel proprio file e magari raggruppare tutte le classi in una cartella dedicata che possiamo chiamare Models/
 organizzando il layout dividendo la struttura ed i contenuti in file e parziali dedicati. */
 
-require __DIR__ . '/Models/movies.php';
+require __DIR__ . '/Models/Movie.php';
 require __DIR__ . '/db.php';
 
 ?>
