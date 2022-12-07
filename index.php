@@ -1,10 +1,7 @@
 <?php
 
-/* è definita una classe ‘Movie’
- - all'interno della classe sono dichiarate delle variabili d'istanza
- - all'interno della classe è definito un costruttore
- - all'interno della classe è definito almeno un metodo
- results: vengono istanziati almeno due oggetti ‘Movie’ e stampati a schermo i valori delle relative proprietà */
+/* Bonus 1:
+Modificare la classe Movie in modo che accetti piú di un genere. */
 
 class Movie
 {
@@ -13,13 +10,15 @@ class Movie
     public $description;
     public $link_to_trailer;
     public $lang = '';
+    public $genres;
 
     // constructor
-    public function __construct(string $title, string $description, string $link_to_trailer)
+    public function __construct(string $title, string $description, string $link_to_trailer, array $genres)
     {
         $this->title = $title;
         $this->description = $description;
         $this->link_to_trailer = $link_to_trailer;
+        $this->genres = $genres;
     }
 
     // methods 
@@ -39,7 +38,7 @@ class Movie
 }
 
 // first obj.
-$alien = new Movie('Alien', 'movie on aliens', 'https://alien...',);
+$alien = new Movie('Alien', 'movie on aliens', 'https://alien...', ['action', 'distopian']);
 
 var_dump($alien);
 
@@ -49,7 +48,7 @@ var_dump($alien_lang);
 
 // second obj.
 
-$matrix = new Movie('Matrix', 'matrix description', 'https://matrix...');
+$matrix = new Movie('Matrix', 'matrix description', 'https://matrix...',  ['action', 'distopian']);
 
 var_dump($matrix);
 
