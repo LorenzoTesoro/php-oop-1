@@ -1,57 +1,56 @@
 <?php
 
-/* Bonus 1:
-Modificare la classe Movie in modo che accetti piú di un genere. */
+/* Bonus 2:
+Creare un layout completo per stampare a schermo una lista di movies.
+Facciamo attenzione all’organizzazione del codice, suddividendolo in appositi file e cartelle.
+Possiamo ad esempio organizzare il codice
+creando un file dedicato ai dati (tipo le array di oggetti) che potremmo chiamare db.php
+mettendo ciascuna classe nel proprio file e magari raggruppare tutte le classi in una cartella dedicata che possiamo chiamare Models/
+organizzando il layout dividendo la struttura ed i contenuti in file e parziali dedicati. */
 
-class Movie
-{
-    // variables
-    public $title;
-    public $description;
-    public $link_to_trailer;
-    public $lang = '';
-    public $genres;
+require __DIR__ . '/Models/movies.php';
+require __DIR__ . '/db.php';
 
-    // constructor
-    public function __construct(string $title, string $description, string $link_to_trailer, array $genres)
-    {
-        $this->title = $title;
-        $this->description = $description;
-        $this->link_to_trailer = $link_to_trailer;
-        $this->genres = $genres;
-    }
+?>
 
-    // methods 
-    public function setLanguageTrailer($trailer_lang)
-    {
-        if ($trailer_lang == 'original') {
-            $this->lang = 'en';
-        } else {
-            $this->lang = 'it';
-        }
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    public function getLanguageTrailer()
-    {
-        return $this->lang;
-    }
-}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP-OOP-1</title>
 
-// first obj.
-$alien = new Movie('Alien', 'movie on aliens', 'https://alien...', ['action', 'distopian']);
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-var_dump($alien);
+    <link rel="stylesheet" href="./style/style.css">
+</head>
 
-$alien->setLanguageTrailer('original');
-$alien_lang = $alien->getLanguageTrailer();
-var_dump($alien_lang);
+<body>
 
-// second obj.
+    <h1 class='text-center text-white'>Movie Database</h1>
 
-$matrix = new Movie('Matrix', 'matrix description', 'https://matrix...',  ['action', 'distopian']);
+    <div class="container">
+        <?php foreach ($movies as $movie) : ?>
+            <div class="card text-white bg-dark">
+                <img class="card-img-top  p-3" src="<?php echo $movie->poster_link ?>" alt="Title">
+                <div class="card-body">
+                    <h4 class="card-title text-center"><?php echo $movie->title ?></h4>
+                    <p class="card-text">Description: <?php echo $movie->description ?></p>
+                    <p class="card-text">Trailer: <?php echo $movie->link_to_trailer ?></p>
+                    <p class="card-text">Genres:
+                        <?php foreach ($movie->genres as $genre) : ?>
+                            <span><?php echo $genre ?></span>
+                        <?php endforeach; ?>
+                    </p>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
 
-var_dump($matrix);
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+</body>
 
-$matrix->setLanguageTrailer('not original');
-$matrix_lang = $matrix->getLanguageTrailer();
-var_dump($matrix_lang);
+</html>
